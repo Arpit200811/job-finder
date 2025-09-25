@@ -12,7 +12,7 @@ app.use("/upload",express.static("./uploads"));
 //http://localhost:9000/upload/daya.jpg
 app.use(expressFileupload())
 const DbConnect=async()=>{ 
-        const con=await mongoose.connect("mongodb://localhost:27017/recruitex");
+        const con=await mongoose.connect(process.env.MONGO_URI);
         if(con){
             console.log("Connected to MongoDB...");
         }
@@ -23,6 +23,6 @@ DbConnect();
  app.use("/api",seekerRoute);
 
 
-app.listen(9000,()=>{
+app.listen(process.env.PORT || 9000,()=>{
     console.log("Server is Running at 9000 port")
 })
